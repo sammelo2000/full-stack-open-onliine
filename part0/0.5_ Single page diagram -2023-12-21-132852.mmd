@@ -1,0 +1,29 @@
+sequenceDiagram
+
+participant browser
+participant server
+
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+activate server
+server->>browser: spa (HTML Document)
+deactivate server
+
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+activate server
+server->>browser: main.css (CSS File)
+deactivate server
+
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+activate server
+server->>browser: spa.js(Javascript File)
+deactivate server
+
+Note right of browser:  The Browser executes the js code that fetches the json data from the server.
+
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+activate server
+server->>browser: [ {"content": "the current date is 12/21/23 at 12:29am","date": "2023-12-21T05:29:07.685Z"}]
+deactivate server
+
+Note right of browser: The browser executes a callback function that renders the json data in the html.
+

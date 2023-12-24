@@ -40,12 +40,33 @@ const App = () => {
     console.log("Handle vote", selected,votesCopy[selected])
   }
 
+  const findMostVotes = () => {
+    let tempMax = votes[0]
+    for (let index = 1; index < votes.length; index++) {
+      if(tempMax < votes[index]) {
+        tempMax = votes[index]
+      }
+    }
+    const mostVoteAnecdote = {
+      voteAmount : tempMax,
+      anecdote : votes.indexOf(tempMax)
+    }
+    return mostVoteAnecdote
+  }
+
+  const mostVotes = findMostVotes()
+
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
       <p>has {votes[selected]} votes</p>
       <Button  handleEvent= {handleSelected} text={"Next anecdotes"}/>
       <Button handleEvent={handleVote} text={"Vote"}/>
+      <h2>Anecdote with most votes</h2>
+      {anecdotes[mostVotes.anecdote]}
+      <p>has {mostVotes.voteAmount} votes</p>
+
     </div>
   )
 }

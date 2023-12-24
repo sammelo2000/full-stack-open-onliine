@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
- const Button = ({handleSelected}) => {
+ const Button = ({handleEvent,text}) => {
   return (
     <div>
-      <button onClick={handleSelected}>next anecdote</button>
+      <button onClick={handleEvent}>{text}</button>
     </div>
   )
 }
@@ -12,6 +12,7 @@ import { useState } from 'react'
 
 const App = () => {
   const [selected, setSelected] = useState(0)
+  const [votes,setVotes] = useState(new Array(8).fill(0))
   const anecdotes = [
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
@@ -32,10 +33,19 @@ const App = () => {
   
   }
 
+  const handleVote = () => {
+    const votesCopy = [...votes]
+    votesCopy[selected] += 1
+    setVotes(votesCopy)
+    console.log("Handle vote", selected,votesCopy[selected])
+  }
+
   return (
     <div>
       {anecdotes[selected]}
-      <Button  handleSelected= {handleSelected}/>
+      <p>has {votes[selected]} votes</p>
+      <Button  handleEvent= {handleSelected} text={"Next anecdotes"}/>
+      <Button handleEvent={handleVote} text={"Vote"}/>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
- const Button = ({handleSelected,setSelected}) => {
+ const Button = ({handleSelected}) => {
   return (
     <div>
       <button onClick={handleSelected}>next anecdote</button>

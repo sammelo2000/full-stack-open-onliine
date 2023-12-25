@@ -1,5 +1,5 @@
 
-//Actually Exercise 2.1 cousreinfo step6
+
 
 const Course = (props) => {
   console.log("course props",props)
@@ -9,8 +9,8 @@ const Course = (props) => {
     <div>
        <Header title = {name} />
        <Content contents = {parts}  />
-       {/* <Total exer = {course} />
-       */}
+       <Total exercises = {parts} />
+      
       </div>
   )
 }
@@ -41,9 +41,20 @@ const Content = (props) => {
 
 const Total = (props) => {
   console.log(props)
+  const {exercises} = props 
+
+  const totalExercies = () => {
+    let sum = 0
+    for(let x of exercises) {
+        sum += x.exercises
+    }
+    return sum
+  }
+
+
   return (
       <>
-      
+        <p><b>Total Exercises</b> {totalExercies()}</p>
       </>
   )
 
@@ -62,6 +73,9 @@ const Part = (props) => {
 }
 
 const App = () => {
+ 
+ 
+ 
   const course = {
     id: 1,
     name: 'Half Stack application development',
@@ -81,10 +95,23 @@ const App = () => {
         exercises: 14,
         id: 3
       },
+      {
+        name: 'Backend',
+        exercises: 24,
+        id: 4
+      },
+      {
+        name: 'Comp 101',
+        exercises: 140,
+        id: 5
+      }
       
     ]
   }
 
+
+
+  
   return <Course course={course} />
 }
 

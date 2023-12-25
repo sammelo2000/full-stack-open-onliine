@@ -1,5 +1,5 @@
 import Course from "./components/Course"
-
+//Exercise 2.4 and 2.5
 const App = () => {
  
  

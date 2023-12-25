@@ -1,70 +1,4 @@
-
-
-
-const Course = (props) => {
-  console.log("course props",props)
-  const {course} = props
-  const {name,parts} = course
-  return (
-    <div>
-       <Header title = {name} />
-       <Content contents = {parts}  />
-       <Total exercises = {parts} />
-      
-      </div>
-  )
-}
-
-const Header = ({title}) => {
-  console.log(title)
-  return (
-    <>
-      <h2>{title}</h2>
-    </>
-  )
-}
-
-const Content = (props) => {
-  console.log("Contents prop",props)
-  const {contents} = props
-  return (
-    <>
-      <ul>
-        {contents.map((content) =>
-          <Part key={content.id} name= {content.name} exercises= {content.exercises}/>
-        )}
-      </ul>
-      
-    </>
-  )
-}
-
-const Total = (props) => {
-  console.log(props)
-  const {exercises} = props 
-
-  const totalExercies = () => exercises.reduce((sum,exercise) => sum+= exercise.exercises, 0)
-
-
-  return (
-      <>
-        <p><b>Total Exercises</b> {totalExercies()}</p>
-      </>
-  )
-
-}
-
-const Part = (props) => {
-
-  console.log("Part prop",props)
-  const {name, exercises} = props
-  return (
-    <>
-      <li>{name} {exercises}</li>
-    </>
-    
-  )
-}
+import Course from "./components/Course"
 
 const App = () => {
  
@@ -134,3 +68,4 @@ const App = () => {
 
 
 export default App
+

@@ -1,8 +1,8 @@
 
-
+//Actually Exercise 2.1 cousreinfo step6
 
 const Course = (props) => {
-  console.log("course prop",props)
+  console.log("course props",props)
   const {course} = props
   const {id,name,parts} = course
   return (
@@ -39,15 +39,15 @@ const Content = (props) => {
   )
 }
 
-// const Total = (props) => {
-//   console.log(props)
-//   return (
-//       <>
+const Total = (props) => {
+  console.log(props)
+  return (
+      <>
       
-//       </>
-//   )
+      </>
+  )
 
-// }
+}
 
 const Part = (props) => {
 

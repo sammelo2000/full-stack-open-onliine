@@ -43,13 +43,7 @@ const Total = (props) => {
   console.log(props)
   const {exercises} = props 
 
-  const totalExercies = () => {
-    let sum = 0
-    for(let x of exercises) {
-        sum += x.exercises
-    }
-    return sum
-  }
+  const totalExercies = () => exercises.reduce((sum,exercise) => sum+= exercise.exercises, 0)
 
 
   return (
@@ -102,7 +96,7 @@ const App = () => {
       },
       {
         name: 'Comp 101',
-        exercises: 140,
+        exercises: 142,
         id: 5
       }
       

@@ -1,4 +1,5 @@
 import { useState } from "react"
+import ContactList from "./components/ContactList"
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -15,15 +16,21 @@ const App = () => {
  
   const  handleAddContact = (e) => {
     e.preventDefault()
-    console.log('addContact target',e.target)
+    console.log('addContact target and value',e.target,)
     const newContact = {
-      name: e.target.value
+      name: newName
     }
 
-    setPersons(persons.concat(newContact))
+    console.log('new name',newName)
+    console.log('New contact',newContact)
+
+    const newContacts = persons.concat(newContact)
+    console.log('New Contacts list',newContacts)
+    setPersons(newContacts)
     setNewName('')
 
     console.log('Contact Added')
+    console.log(newContacts)
 
   }
 
@@ -46,10 +53,11 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        
-        {persons.map(person => {
-          <li key={person.name}>{person.name}</li>
-        })}
+        {
+          persons.map(person =>
+            <ContactList key={person.name} name={person.name} />
+            )
+        }
       </ul>
     
     </div>

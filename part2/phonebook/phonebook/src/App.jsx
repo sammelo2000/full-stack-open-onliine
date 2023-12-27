@@ -6,12 +6,18 @@ const App = () => {
     { name: 'Arto Hellas' }
   ]) 
   const [newName, setNewName] = useState('')
+  const [newNumber,setNewNumber] = useState('')
 
 
   const handleNameChange = (e) => {
     console.log('handleNewName',e.target)
     setNewName(e.target.value)
     
+  }
+
+  const handleNumberChange = (e) => {
+    console.log('handleNumberChang',e.target)
+    setNewNumber(e.target.value)
   }
 
   const checkExsitingName = (name) => {
@@ -29,7 +35,8 @@ const App = () => {
     if(checkExsitingName(newName)) {
       console.log('addContact target and value',e.target,)
       const newContact = {
-        name: newName
+        name: newName,
+        number: newNumber
       }
   
       console.log('new name',newName)
@@ -39,6 +46,7 @@ const App = () => {
       console.log('New Contacts list',newContacts)
       setPersons(newContacts)
       setNewName('')
+      setNewNumber('')
   
       console.log('Contact Added')
       console.log(newContacts)
@@ -57,10 +65,19 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={handleAddContact}>
         <div>
-          name: <input 
-          value={newName}
-          onChange={handleNameChange}
-          
+          name: 
+          <input 
+            value={newName}
+            onChange={handleNameChange}
+            
+          />
+        </div>
+        <div>
+          number: 
+          <input 
+            value={newNumber}
+            onChange={handleNumberChange}
+
           />
         </div>
         <div>
@@ -71,7 +88,7 @@ const App = () => {
       <ul>
         {
           persons.map(person =>
-            <ContactList key={person.name} name={person.name} />
+            <ContactList key={person.name} contact={person} />
             )
         }
       </ul>

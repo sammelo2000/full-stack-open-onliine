@@ -13,24 +13,40 @@ const App = () => {
     setNewName(e.target.value)
     
   }
+
+  const checkExsitingName = (name) => {
+    for(let contact of persons) {
+      if(contact.name === name) {
+        return false
+      }
+    }
+    return true
+  }
  
   const  handleAddContact = (e) => {
+
     e.preventDefault()
-    console.log('addContact target and value',e.target,)
-    const newContact = {
-      name: newName
+    if(checkExsitingName(newName)) {
+      console.log('addContact target and value',e.target,)
+      const newContact = {
+        name: newName
+      }
+  
+      console.log('new name',newName)
+      console.log('New contact',newContact)
+  
+      const newContacts = persons.concat(newContact)
+      console.log('New Contacts list',newContacts)
+      setPersons(newContacts)
+      setNewName('')
+  
+      console.log('Contact Added')
+      console.log(newContacts)
+    }else{
+      alert(`${newName} already exist as a contact`)
     }
-
-    console.log('new name',newName)
-    console.log('New contact',newContact)
-
-    const newContacts = persons.concat(newContact)
-    console.log('New Contacts list',newContacts)
-    setPersons(newContacts)
-    setNewName('')
-
-    console.log('Contact Added')
-    console.log(newContacts)
+   
+    
 
   }
 

@@ -1,9 +1,9 @@
 
 
 const ContactList = (props) => {
-  const  {name} = props
+  const  {contact} = props
   return (
-    <li>{name}</li>
+    <li>{contact.name} {contact.number}</li>
   )
 }
 

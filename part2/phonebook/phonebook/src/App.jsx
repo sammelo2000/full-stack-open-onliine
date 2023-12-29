@@ -109,9 +109,12 @@ const App = () => {
       <h2>Numbers</h2>
       <ul>
         {
-          persons.map(person =>
+          (fillteredName === '') ?  persons.map(person =>
             <ContactList key={person.id} contact={person} />
-            )
+            ) :
+             fillteredResult.map(person => 
+              <ContactList key={person.id} contact={person} />
+              )
         }
       </ul>
     

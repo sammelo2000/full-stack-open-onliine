@@ -1,5 +1,8 @@
 import { useState } from "react"
 import ContactList from "./components/ContactList"
+import Filter from "./components/Filter"
+import PersonForm from "./components/PersonForm"
+import Persons from "./components/Persons"
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -53,7 +56,8 @@ const App = () => {
       console.log('addContact target and value',e.target,)
       const newContact = {
         name: newName,
-        number: newNumber
+        number: newNumber,
+        id: persons.length + 1
       }
   
       console.log('new name',newName)
@@ -80,43 +84,25 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-       <>Search Contact:<input
-        value={fillteredName}
-        onChange={handleFilterContact}
-       /></>
+      <Filter 
+      fillteredName={fillteredName} 
+      handleFilterContact={handleFilterContact}/>
+       
       <h2>add a new contact</h2>
-      <form onSubmit={handleAddContact}>
-        <div>
-          name: 
-          <input 
-            value={newName}
-            onChange={handleNameChange}
-            
-          />
-        </div>
-        <div>
-          number: 
-          <input 
-            value={newNumber}
-            onChange={handleNumberChange}
-
-          />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+        <PersonForm
+        handleAddContact={handleAddContact}
+        newName={newName} 
+        handleNameChange={handleNameChange}
+        newNumber={newNumber}
+        handleNumberChange={handleNumberChange}
+        />
       <h2>Numbers</h2>
-      <ul>
-        {
-          (fillteredName === '') ?  persons.map(person =>
-            <ContactList key={person.id} contact={person} />
-            ) :
-             fillteredResult.map(person => 
-              <ContactList key={person.id} contact={person} />
-              )
-        }
-      </ul>
+      <Persons 
+        persons={persons}
+        fillteredName={fillteredName}
+        fillteredResult={fillteredResult}
+      />
+      
     
     </div>
   )

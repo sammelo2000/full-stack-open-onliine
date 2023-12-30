@@ -10,6 +10,8 @@ const App = () => {
   const [newNumber,setNewNumber] = useState('')
   const [fillteredName,setFillteredName] = useState('')
   const [fillteredResult,setFillteredResult] = useState([])
+
+  const baseUrl = 'http://localhost:3001/persons'
   
 
   const handleFilterContact = (e) => {
@@ -58,14 +60,25 @@ const App = () => {
       console.log('new name',newName)
       console.log('New contact',newContact)
   
-      const newContacts = persons.concat(newContact)
-      console.log('New Contacts list',newContacts)
-      setPersons(newContacts)
-      setNewName('')
-      setNewNumber('')
+      
+
+      axios
+      .post(baseUrl,newContact)
+      .then(response => {
+        const newContacts = persons.concat(response.data)
+        console.log('New Contacts list',newContacts)
+        setPersons(newContacts)
+        setNewName('')
+        setNewNumber('')
   
-      console.log('Contact Added')
-      console.log(newContacts)
+        console.log('Contact Added')
+        console.log(newContacts)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+     
+      
     }else{
       alert(`${newName} already exist as a contact`)
     }
@@ -75,7 +88,7 @@ const App = () => {
   }
   useEffect(() => {
     axios
-    .get('http://localhost:3001/persons')
+    .get(baseUrl)
     .then((response => {
       console.log('Promise fulfilled',response.data)
       setPersons(response.data)

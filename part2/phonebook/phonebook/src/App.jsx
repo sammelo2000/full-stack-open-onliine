@@ -57,7 +57,7 @@ const App = () => {
       const newContact = {
         name: newName,
         number: newNumber,
-        id: persons.length + 1
+        
       }
   
       console.log('new name',newName)
@@ -92,15 +92,18 @@ const App = () => {
     
   },[])
 
-  const removeContact = (id) => {
+  const removeContact = (contact) => {
+    if(confirm(`Delete ${contact.name}`) ) {
     contactService
-    .deleteContact(id)
+    .deleteContact(contact.id)
     .then((res) => {
       console.log('removeContact response data',res.data)
-      const refresh = persons.filter(person=> person.id !== id)
+      const refresh = persons.filter(person=> person.id !== contact.id)
       setPersons(refresh)
       console.log('deletd succesful')
     })
+    } 
+    
   }
 
 

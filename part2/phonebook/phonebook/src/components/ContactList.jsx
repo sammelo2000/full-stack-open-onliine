@@ -6,7 +6,7 @@ const ContactList = (props) => {
   const  {contact,removeContact} = props
 
   return (
-    <li>{contact.name} {contact.number} <button onClick={() => removeContact(contact.id) }>delete</button></li>
+    <li>{contact.name} {contact.number} <button onClick={() => removeContact(contact) }>delete</button></li>
   )
 }
 

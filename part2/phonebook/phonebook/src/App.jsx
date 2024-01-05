@@ -92,6 +92,17 @@ const App = () => {
     
   },[])
 
+  const removeContact = (id) => {
+    contactService
+    .deleteContact(id)
+    .then((res) => {
+      console.log('removeContact response data',res.data)
+      const refresh = persons.filter(person=> person.id !== id)
+      setPersons(refresh)
+      console.log('deletd succesful')
+    })
+  }
+
 
   
 
@@ -115,6 +126,7 @@ const App = () => {
         persons={persons}
         fillteredName={fillteredName}
         fillteredResult={fillteredResult}
+        removeContact= {removeContact}
       />
       
     

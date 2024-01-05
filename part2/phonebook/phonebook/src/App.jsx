@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import axios from "axios"
+
 import ContactList from "./components/ContactList"
 import Filter from "./components/Filter"
 import PersonForm from "./components/PersonForm"
@@ -15,7 +15,7 @@ const App = () => {
   const [fillteredResult,setFillteredResult] = useState([])
 
   
-  const baseUrl = 'http://localhost:3001/persons'
+  
 
   const handleFilterContact = (e) => {
       console.log('handleFilter',e.target)
@@ -23,9 +23,9 @@ const App = () => {
       const findName = e.target.value
       setFillteredName(e.target.value)
       const fillteredNames = persons.filter(person =>
-         person.name.toLocaleLowerCase() === findName.toLocaleLowerCase() )
-    console.log('Filltered Result ', fillteredNames)
-    setFillteredResult(fillteredNames)
+      person.name.toLocaleLowerCase() === findName.toLocaleLowerCase() )
+      console.log('Filltered Result ', fillteredNames)
+      setFillteredResult(fillteredNames)
   } 
 
 
@@ -62,10 +62,10 @@ const App = () => {
   
       console.log('new name',newName)
       console.log('New contact',newContact)
-      axios
-      .post(baseUrl,newContact)
-      .then((res) => {
-        console.log('post method response',res.data)
+      
+      contactService
+      .create(newContact)
+      .then(res => {
         setPersons(persons.concat(res.data))
       })
 

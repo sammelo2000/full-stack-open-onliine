@@ -7,7 +7,8 @@ const Persons = (props) => {
     const {
         fillteredName,
         persons,
-        fillteredResult
+        fillteredResult,
+        removeContact
     } = props
     console.log('This is persons',persons)
   return (
@@ -15,10 +16,10 @@ const Persons = (props) => {
         <ul>
         {
           (fillteredName === '') ?  persons.map(person =>
-            <ContactList key={person.id} contact={person} />
+            <ContactList key={person.id} contact={person} removeContact={removeContact} />
             ) :
              fillteredResult.map(person => 
-              <ContactList key={person.id} contact={person} />
+              <ContactList key={person.id} contact={person}  removeContact = {removeContact} />
               )
         }
       </ul>

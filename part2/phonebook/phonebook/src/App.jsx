@@ -42,7 +42,7 @@ const App = () => {
 
   const checkExsitingName = (name) => {
     for(let contact of persons) {
-      if(contact.name === name) {
+      if(contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()) {
         return false
       }
     }
@@ -78,7 +78,20 @@ const App = () => {
      
       
     }else{
-      alert(`${newName} already exist as a contact`)
+      const confirmed  = confirm(`${newName} is already added to the note book,  replace number with new one`)
+      if(confirmed) {
+        const toUpdate = persons.filter((person) => person.name === newName )
+        console.log('ToUpdate', toUpdate)
+
+        const [person] = toUpdate
+        const updated = {...person,number:newNumber}
+        contactService
+        .updateNumber(updated)
+        .then((res) => {
+          console.log('updated',res.data)
+        })
+      }
+
     }
    
     

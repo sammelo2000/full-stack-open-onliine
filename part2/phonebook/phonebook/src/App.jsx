@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react"
+import axios from "axios"
 import ContactList from "./components/ContactList"
 import Filter from "./components/Filter"
 import PersonForm from "./components/PersonForm"
 import Persons from "./components/Persons"
-import axios from "axios"
+import contactService from "./components/contactService"
+
+
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
@@ -11,8 +14,8 @@ const App = () => {
   const [fillteredName,setFillteredName] = useState('')
   const [fillteredResult,setFillteredResult] = useState([])
 
-  const baseUrl = 'http://localhost:3001/persons'
   
+  const baseUrl = 'http://localhost:3001/persons'
 
   const handleFilterContact = (e) => {
       console.log('handleFilter',e.target)
@@ -59,24 +62,19 @@ const App = () => {
   
       console.log('new name',newName)
       console.log('New contact',newContact)
-  
-      
-
       axios
       .post(baseUrl,newContact)
-      .then(response => {
-        const newContacts = persons.concat(response.data)
-        console.log('New Contacts list',newContacts)
-        setPersons(newContacts)
-        setNewName('')
-        setNewNumber('')
-  
-        console.log('Contact Added')
-        console.log(newContacts)
+      .then((res) => {
+        console.log('post method response',res.data)
+        setPersons(persons.concat(res.data))
       })
-      .catch(error => {
-        console.log(error)
-      })
+
+
+      setNewName('')
+      setNewNumber('')
+      
+
+     
      
       
     }else{
@@ -87,12 +85,11 @@ const App = () => {
 
   }
   useEffect(() => {
-    axios
-    .get(baseUrl)
-    .then((response => {
-      console.log('Promise fulfilled',response.data)
-      setPersons(response.data)
-    }))
+    const promise = contactService.getAll()
+    promise.then((res) => {
+      setPersons(res.data)
+    })
+    
   },[])
 
 

@@ -3,11 +3,13 @@ import ContactList from './ContactList'
 
 const Persons = (props) => {
     console.log(props)
+
     const {
         fillteredName,
         persons,
         fillteredResult
     } = props
+    console.log('This is persons',persons)
   return (
     <div>
         <ul>

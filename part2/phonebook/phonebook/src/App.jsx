@@ -5,6 +5,8 @@ import Filter from "./components/Filter"
 import PersonForm from "./components/PersonForm"
 import Persons from "./components/Persons"
 import contactService from "./components/contactService"
+import Notification from "./components/Notification"
+
 
 
 const App = () => {
@@ -13,6 +15,8 @@ const App = () => {
   const [newNumber,setNewNumber] = useState('')
   const [fillteredName,setFillteredName] = useState('')
   const [fillteredResult,setFillteredResult] = useState([])
+  const [alertMessage,setAlertMessage] = useState(null)
+
 
   
   
@@ -69,6 +73,10 @@ const App = () => {
         setPersons(persons.concat(res.data))
       })
 
+      setAlertMessage(`${newName} has been added to contacts`)
+       setTimeout(() => {
+        setAlertMessage(null)
+       },4000)
 
       setNewName('')
       setNewNumber('')
@@ -138,6 +146,7 @@ const App = () => {
 
   return (
     <div>
+      <Notification message={alertMessage} />
       <h2>Phonebook</h2>
       <Filter 
       fillteredName={fillteredName} 

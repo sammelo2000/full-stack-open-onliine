@@ -116,6 +116,12 @@ const App = () => {
           },4000)
           //Fix this when up . just have to find and replace
         })
+        .catch(() => {
+          setAlertMessage(`${updated.name} has been removed from server`)
+          setTimeout(() => {
+            setAlertMessage(null)
+          },4000)
+        })
       }
 
     }

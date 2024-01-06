@@ -20,4 +20,15 @@ const deleteContact = (id) => {
   return  request
 }
 
-export default {getAll,create,deleteContact}
+const updateNumber = (contact) => {
+  const request = axios.put(`${baseUrl}/${contact.id}`,contact)
+  return request
+
+}
+
+export default {
+  getAll,
+  create,
+  deleteContact,
+  updateNumber
+}

@@ -110,6 +110,10 @@ const App = () => {
           setPersons(updatedContactList)
           setNewName('')
           setNewNumber('')
+          setAlertMessage(`${res.data.name} number has been updated to ${res.data.number}`)
+          setTimeout(() => {
+            setAlertMessage(null)
+          },4000)
           //Fix this when up . just have to find and replace
         })
       }

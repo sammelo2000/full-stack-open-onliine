@@ -80,15 +80,29 @@ const App = () => {
     }else{
       const confirmed  = confirm(`${newName} is already added to the note book,  replace number with new one`)
       if(confirmed) {
-        const toUpdate = persons.filter((person) => person.name === newName )
+        const toUpdate = persons.filter((person) => person.name.toLocaleLowerCase() === newName.toLocaleLowerCase() )
         console.log('ToUpdate', toUpdate)
 
-        const [person] = toUpdate
-        const updated = {...person,number:newNumber}
+        const [toUpdateperson] = toUpdate
+        console.log('ToUpdate a Person',toUpdateperson)
+        
+        const updated = {...toUpdateperson,number:newNumber}
+
+        console.log('Updated Person',updated)
         contactService
         .updateNumber(updated)
         .then((res) => {
-          console.log('updated',res.data)
+          console.log('Updated response',res.data)
+          console.log('Og person list',persons)
+          
+          const oldContactFilltered = persons.filter(p => p.id !== res.data.id)
+          console.log('oldConTactFilltered',oldContactFilltered)
+          const updatedContactList = oldContactFilltered.concat(res.data)
+          console.log('New contact list',updatedContactList)
+          setPersons(updatedContactList)
+          setNewName('')
+          setNewNumber('')
+          //Fix this when up . just have to find and replace
         })
       }
 

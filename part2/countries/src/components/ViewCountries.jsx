@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { findCountrie } from "../service/searchCountrie";
-import displayCountrie from "../service/showCountries";
+import DisplayCountrie from "./DisplayCountrie";
 
 
 const ViewCountries = () => {
@@ -67,7 +67,7 @@ const ViewCountries = () => {
             <h2>Search for countrie</h2>
             <input value={countrie} onChange={onSearch} />
             <div>
-                {(filtered.length > 10 )? "Too many matches for qeury" : (filtered.length == 1)? displayCountrie(filtered): <ul>{names}</ul>}
+                {(filtered.length > 10 )? "Too many matches for qeury" : (filtered.length == 1)? <DisplayCountrie filtered={filtered}/>: <ul>{names}</ul>}
 
 
             </div>

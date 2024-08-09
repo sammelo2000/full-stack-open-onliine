@@ -1,5 +1,3 @@
-import displayCountrie from "./showCountries"
-
 
 
 
